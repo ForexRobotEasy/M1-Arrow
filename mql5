@@ -1,0 +1,108 @@
+
+//+------------------------------------------------------------------+
+//|                                                   M1 Arrow.mq5    |
+//|                          Copyright 2021, forexroboteasy.com       |
+//|                   Developed by Forex Robot Easy Team              |
+//+------------------------------------------------------------------+
+
+#include <Trade\Trade.mqh>
+
+//+------------------------------------------------------------------+
+//| Global Variables                                                  |
+//+------------------------------------------------------------------+
+CTrade trade; // Trade object for executing trades
+
+//+------------------------------------------------------------------+
+//| Custom Indicator Inputs                                           |
+//+------------------------------------------------------------------+
+input int wavePeriod = 20; // Period for calculating waves
+input int volumeThreshold = 100; // Minimum volume threshold for wave confirmation
+
+//+------------------------------------------------------------------+
+//| Initialization function                                          |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    // Initialize the trade object
+    trade.SetExpertMagicNumber(123456); // Set expert magic number for tracking trades
+    trade.SetDeviationInPoints(10); // Set deviation in points for trade execution
+    trade.SetMarginMode(MARGIN_MODE_RETAIL_NETTING); // Set margin mode for trade execution
+
+    return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Deinitialization function                                        |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+    // Perform any necessary clean-up tasks here
+}
+
+//+------------------------------------------------------------------+
+//| Start function                                                    |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+    // Calculate waves and confirm them using volume analysis
+    bool isWaveConfirmed = CheckWaveConfirmation();
+
+    // Generate trading signals based on the calculated waves
+    if(isWaveConfirmed)
+    {
+        // Execute buy or sell trade based on the generated signal
+        ExecuteTrade();
+    }
+}
+
+//+------------------------------------------------------------------+
+//| Function to calculate waves and confirm them using volume analysis |
+//+------------------------------------------------------------------+
+bool CheckWaveConfirmation()
+{
+    // Perform wave analysis logic here
+    // ...
+    // ...
+
+    // Perform volume analysis logic here
+    // ...
+    // ...
+
+    // Confirm wave based on volume analysis
+    if(volume > volumeThreshold)
+    {
+        return true; // Wave is confirmed
+    }
+
+    return false; // Wave is not confirmed
+}
+
+//+------------------------------------------------------------------+
+//| Function to execute trades based on generated signals             |
+//+------------------------------------------------------------------+
+void ExecuteTrade()
+{
+    // Perform trade execution logic here
+    // ...
+    // ...
+
+    double lotSize = 0.01; // Specify lot size for the trade
+    ENUM_ORDER_TYPE orderType = ORDER_TYPE_BUY; // Specify order type (buy/sell)
+
+    // Execute the trade
+    trade.Buy(lotSize, Symbol(), 0, 0, 0, 0, 0, '', 0);
+}
+
+//+------------------------------------------------------------------+
+//| Logical conclusion                                                |
+//+------------------------------------------------------------------+
+void LogicalConclusion()
+{
+    // Perform any necessary tasks to conclude the program
+    // ...
+
+    // Print a message indicating the program has finished successfully
+    Print('M1 Arrow program has successfully concluded.');
+}
+
+//+------------------------------------------------------------------+
